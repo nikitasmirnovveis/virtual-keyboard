@@ -1,0 +1,454 @@
+@media (width<=390px) {
+
+	
+
+	.nav-container{display: none;}
+	.header-content {display: none;}
+
+	// .logo-container{
+	// 	z-index: 1;
+	// }
+
+	.logo-img{
+		z-index: 1;
+		width: 30px;
+		height: 30px;
+	}
+	
+
+	.header--mobile{
+		display: flex;
+		position: absolute;
+		padding: 1em;
+ 		width: 100%;
+		justify-content: space-between;
+		// z-index: 1; //needed to make header appear over preview bg
+		overflow-x: hidden; //cuts y axis too :(
+		height: 250px; //prevents burger being clipped on y-axis
+
+	}
+
+	.burger-btn{
+		z-index: 1;
+		width: 30px;
+		height: 30px;
+
+	}
+	#burger-menu{
+		position: absolute;
+		box-shadow: 0px 4px 3px 0px #0D606F40;
+		background: #F2785C;
+		border-radius: 10px;
+		width: 165px;
+		height: 250px;
+		top: 0;
+		right: -165px;
+		transition: .4s;
+		z-index: 2;
+
+		&.active{
+			right:0;
+		}
+	}
+
+	.overlay {
+		&.on{
+		content: "";
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(0, 0, 0, 0.5); /* Semi-transparent black color */
+		// display: none; /* Initially hidden */
+		z-index: 1; /* Place it below the burger menu */
+		
+		}
+	}
+	.cancel{
+		position: absolute;
+		width: 30px;
+		height: 30px;
+		top: 6px;
+		left: 6px;
+		&:hover{
+			cursor: pointer;
+		}
+
+	}
+	
+	.burger-container{
+		padding: 44px 15px 30px 44px;
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		justify-content: space-between;
+		align-items: flex-end;
+	}
+	.burger-item{
+		font-family: "Red Hat Text";
+		font-size: 16px;
+		font-weight: 500;
+		line-height: normal;
+		letter-spacing: 0em;
+		text-align: left;
+		color: #FFFFFF;
+		& a {
+			color: #FFFFFF;
+		}
+	
+
+	}
+
+	// PREVIEW
+	.preview{
+		padding: 142px 15px 0 15px;
+		width: 390px;
+		height: 251px;
+		background: url("../img/mobile-bg1.png")  no-repeat top center;
+		position: relative;
+		z-index: 0;
+		&::before{
+			content: "";
+			position: absolute;
+			width: 100%;
+        	height: 100%;
+			top:0;
+			left:0;
+			background: linear-gradient(180deg, #0D606F 0%, rgba(13, 96, 111, 0) 25.1%);
+			z-index: -1; //allows to inspect elements inside preview
+		}
+		
+	}
+	.preview-h{display: none;}
+	.preview-p{display: none;}
+
+	.search-container{
+		width: 360px;
+		height: 48px;
+		// padding: 0 15px;
+	}
+	#search-bar{
+		padding: 15px;
+		
+		font-family: Aleo;
+		font-size: 14px;
+		font-style: italic;
+		font-weight: 400;
+		line-height: normal;
+		// height: 11.116px;
+		&::placeholder{
+			font-family: Aleo;
+			font-size: 14px;
+			font-style: italic;
+			font-weight: 400;
+			line-height: normal;
+			// height: 11.116px;
+		}
+	}
+	
+	.search-btn{
+		right: 9px;
+		top: 9px;
+		max-width: 92px;
+		height: 30px;
+		padding: 0 9px;
+	}
+	.search-btn-text{
+		font-family: "Red Hat Text";
+		font-size: 11px;
+		font-weight: 500;
+		line-height: normal;
+		text-align: center;		
+	}
+
+	
+	.section-title{
+		color: #F2785C;
+		font-family: "Red Hat Text";
+		font-size: 14px;
+		font-style: normal;
+		font-weight: 500;
+		line-height: normal;
+		padding: 20px 0;
+	}
+
+	//
+	//STEPS TO PERFECT TRIP
+	//
+	.steps-container{
+		padding: 0 15px;
+	}
+	
+
+	#icon1{
+		align-items: flex-start;
+		& .steps-container-item-text{
+			// width: 45px; //width moves icon shape for some reason 
+			text-align: start;
+			margin-right: 40px;
+		}
+	}
+	#icon3{
+		align-items: flex-end;
+		& .steps-container-item-text{
+			text-align: end;
+		}
+	}
+
+	.icon-shape{
+		width: 70px;
+		height: 70px;
+	}
+
+	.steps-vector{
+		transform: scale(0.7);
+	}
+
+	.steps-container-item-text{
+		color: #0D606F;
+		font-family: Aleo;
+		font-size: 10px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: normal;
+		padding: 10px 0 0 0 ; 
+	}
+
+//
+//DESTINATIONS
+//
+	.destinations{
+		// align-items: flex-start; ////makes 1st img be in center of screen
+		padding: 0 15px;		
+	}
+	.slider-wrapper{
+		// position: relative;
+		// max-height: 210px;
+		overflow: hidden;
+
+	}
+
+	.slider{
+		// aspect-ratio: 16 / 9;
+		max-height: 210px;
+		border-radius: unset;
+		gap: unset;
+		width: 360px;
+		// position: relative;
+		// display: flex;
+		// flex-direction: column-reverse;
+	}
+	
+	.destination-item{
+		// position: relative;
+		// top:0;
+		// left: 0;
+		width: 360px;
+		height: 210px;
+		// position: relative;
+		// transform: translateX(-200%); /* Start items off-screen to the left */
+		transition: transform 0.4s ease-in-out; /* Apply smooth transition */
+	}
+
+	.active-block{
+		display: block;
+		// transition: .4s;
+
+	}
+
+	.destination-img{
+		width: 360px;
+		height: 210px;
+		object-fit:cover;
+
+	}
+
+	.destination-name{
+		color: #FFF;
+		font-family: "Red Hat Text";
+		font-size: 20px;
+		font-style: normal;
+		font-weight: 500;
+		line-height: normal;
+		top: 8px;
+	}
+	
+
+
+	.slider-nav{
+		display: flex;
+		column-gap: 6px;
+			position: absolute;
+			bottom: 12px;
+			left: 50%;
+			transform: translateX(-50%);
+			padding: unset;
+		& a {
+			width: 8px;
+			height: 8px;
+		}
+	}
+
+	// .active, .dot:hover {
+  	// 	background-color: #717171;
+	// }
+
+	.arrow-nav{
+		display: unset;
+		position: absolute;
+		bottom: 45%; //wtf is it relative to??
+				// transform: translate(-50%, -50%);
+		display: flex;
+		justify-content: space-between;
+		width: 100%;		
+	}
+	.prev, .next{
+		// transform: translate(-50%, -50%);
+		opacity: 0.5;
+		// padding-left:330px;
+		// z-index: 1;
+		&:hover, &:focus{
+			opacity: 1;
+		}
+	}
+
+	.prev{		
+  		transform: scaleX(-1);
+	}
+	// .next{
+	// 	padding-left:330px;
+	// 	// margin-left: 0;
+
+	// }
+
+
+	.destinations-btn{
+		width: 92px;
+		height: 30px;
+		justify-content: center;
+		padding: unset;
+		&::before{
+			align-self: center;
+			transform: scale(0.25);
+			width: 0px;
+		}
+		
+	}
+	.destinations-btn-text{
+		color: #FFF;
+		text-align: right;
+		font-size: 11px;
+		font-style: normal;
+		font-weight: 500;
+		line-height: normal;
+	}
+
+
+
+
+
+
+	// 
+	// STORIES
+	// 
+	
+	.stories-bg {
+		background: url("../img/mobile-bg2.png")  no-repeat bottom center;
+		padding-bottom: unset;
+		padding-bottom: 60px;
+		
+		&::before{
+			margin-top: -60px;
+		}
+	}
+	.stories-items{
+		padding: 15px 15px;
+		gap: 15px;
+	}
+	
+	.story-img{
+		width: 155px;
+		height: 130px;
+		object-fit: cover;
+		margin-right: 10px;
+	}
+	.story-hp{
+		gap: 10px;
+	}
+	.story-title{
+		font-size: 11px;
+		font-style: normal;
+		font-weight: 700;
+	}
+	.story-text{
+		display: none;
+	}
+	.story-text--mobile{
+		display: unset;
+
+		color: #0D606F;
+		font-family: Aleo;
+		font-size: 9px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: normal;		
+		& a {
+			color: #0D606F;
+			font-family: Aleo;
+			font-size: 9px;
+			font-style: normal;
+			font-weight: 700;
+			line-height: normal;
+			text-decoration-line: underline;
+		}
+	}
+	.stories-btn{
+		width: 92px;
+		height: 30px;
+		justify-content: center;
+		padding: unset;
+		&::before{
+			align-self: center;
+			transform: scale(0.25);
+			width: 0px;
+		}
+		&:hover, &:focus{
+			cursor: pointer;
+			transform: scale(1.1);
+		}	
+		& .stories-btn-text{
+			color: #FFF;
+			text-align: right;
+			font-family: "Red Hat Text";
+			font-size: 11px;
+			font-style: normal;
+			font-weight: 500;
+			line-height: normal;
+		}
+	}
+
+	
+
+// 
+// FOOTER
+// 
+	.footer{
+		padding: 15px 0;
+		justify-content: center;
+		// position:
+	}
+
+	.footer-container{
+		padding: 0;
+	}
+	.footer-text{
+		display: none;
+	}
+	.social-media-container{
+		margin-left: unset;
+		
+	}
+
+
+}
