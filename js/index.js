@@ -83,22 +83,7 @@ for (let rowName in allKeys) {
                         //     textarea.dispatchEvent(new Event('input'));
                         // })
                     }else{
-                        const cursorStart = textarea.selectionStart;
-                        const cursorEnd = textarea.selectionEnd;
-                        const currentValue = textarea.value;
-                    
-                        // Calculate the new value with the character inserted at the cursor position
-                        const newValue =
-                            currentValue.substring(0, cursorStart) +
-                            caseDiv.textContent +
-                            currentValue.substring(cursorEnd);
-                    
-                        textarea.value = newValue;
-                        textarea.selectionStart = cursorStart + 1; // Move the cursor one position forward
-                        textarea.selectionEnd = cursorStart + 1;
-                        textarea.focus();
-
-                        textarea.dispatchEvent(new Event('input'));
+                        insertSpecialKey(caseDiv.textContent);
                     }
                 
                 });
@@ -123,49 +108,13 @@ for (let rowName in allKeys) {
 
 //SPECIAL KEYS virtual
 kbd_content.querySelector('.Tab').addEventListener('click', () => {
-    // textarea.value += ' '.repeat(4);//'\u00A0\u00A0\u00A0\u00A0';
-        // Insert spaces into the textarea
-        const cursorStart = textarea.selectionStart;
-        const cursorEnd = textarea.selectionEnd;
-        const currentValue = textarea.value;
-        const spaces = ' '.repeat(4); // Adjust the number of spaces as needed
-    
-        // Calculate the new value with spaces inserted at the cursor position
-        const newValue =
-            currentValue.substring(0, cursorStart) +
-            spaces +
-            currentValue.substring(cursorEnd);
-    
-        textarea.value = newValue;
-        textarea.selectionStart = cursorStart + spaces.length; // Move the cursor forward
-        textarea.selectionEnd = cursorStart + spaces.length;
-        textarea.focus();
-    
-        textarea.dispatchEvent(new Event('input'));
+    insertSpecialKey(' '.repeat(4));
 })
 kbd_content.querySelector('.Space').addEventListener('click', () => {
-    // textarea.value += ' ';//'\u00A0';
-    const cursorStart = textarea.selectionStart;
-        const cursorEnd = textarea.selectionEnd;
-        const currentValue = textarea.value;
-        const space = ' '; // Adjust the number of spaces as needed
-    
-        // Calculate the new value with spaces inserted at the cursor position
-        const newValue =
-            currentValue.substring(0, cursorStart) +
-            space +
-            currentValue.substring(cursorEnd);
-    
-        textarea.value = newValue;
-        textarea.selectionStart = cursorStart + space.length; // Move the cursor forward
-        textarea.selectionEnd = cursorStart + space.length;
-        textarea.focus();
-
-    textarea.dispatchEvent(new Event('input'));
+    insertSpecialKey(' ');
 })
+
 kbd_content.querySelector('.Backspace').addEventListener('click', () => {
-    // textarea.value = textarea.value.slice(0, -1);
-    // textarea.dispatchEvent(new Event('input'));
     const cursorStart = textarea.selectionStart;
     const cursorEnd = textarea.selectionEnd;
     const currentValue = textarea.value;
@@ -193,6 +142,7 @@ kbd_content.querySelector('.Backspace').addEventListener('click', () => {
     }
     textarea.dispatchEvent(new Event('input'));
 })
+
 kbd_content.querySelector('.Delete').addEventListener('click', () => {
     const cursorStart = textarea.selectionStart;
     const cursorEnd = textarea.selectionEnd;
@@ -237,22 +187,7 @@ kbd_content.querySelector('.ArrowRight').addEventListener('click', () => {
 
 
 kbd_content.querySelector('.Enter').addEventListener('click', () => {
-    const cursorStart = textarea.selectionStart;
-    const cursorEnd = textarea.selectionEnd;
-    const currentValue = textarea.value;
-    const spaces = '\n' // Adjust the number of spaces as needed
-    // Calculate the new value with spaces inserted at the cursor position
-    const newValue =
-        currentValue.substring(0, cursorStart) +
-        spaces +
-        currentValue.substring(cursorEnd);
-
-    textarea.value = newValue;
-    textarea.selectionStart = cursorStart + spaces.length; // Move the cursor forward
-    textarea.selectionEnd = cursorStart + spaces.length;
-    textarea.focus();
-
-    textarea.dispatchEvent(new Event('input'));
+    insertSpecialKey('\n');
 })
 
 
@@ -277,9 +212,8 @@ document.addEventListener('keydown', (event) => {
 });
 
 
-// Create a variable to track the Shift key state
 let shiftKeyHeld = false;
-let capsLockPressed = false;
+let capsLockActive = false;
 
 // SHIFT
 function toggleShift() {
@@ -315,12 +249,12 @@ function toggleCaps() {
     kbd_content.querySelector('.CapsLock').classList.toggle('active');
     const elements = document.querySelectorAll('.caseDown, .caps');    
     elements.forEach(element => {
-        if(!capsLockPressed){    
-            capsLockPressed=true;
+        if(!capsLockActive){    
+            capsLockActive=true;
             // kbd_content.querySelector('.CapsLock').classList.add('active');
             element.classList.toggle('hidden');
         } else {
-            capsLockPressed=false
+            capsLockActive=false
             // kbd_content.querySelector('.CapsLock').classList.remove('active');
             element.classList.toggle('hidden');
         }
@@ -333,23 +267,27 @@ kbd_content.querySelector('.CapsLock').addEventListener('click', () => {
 });
 
 
-//CAPSSHIFT//CAPSSHIFT//CAPSSHIFT//CAPSSHIFT//CAPSSHIFT//CAPSSHIFT//CAPSSHIFT//CAPSSHIFT//CAPSSHIFT//CAPSSHIFT
-function toggleCapsShift() {
-    // kbd_content.querySelector('.CapsLock').classList.toggle('active');
-    const elements = document.querySelectorAll('.caseDown, .caseUp, .caps, .shiftCaps');    
-    elements.forEach(caseDiv => {
-            caseDiv.classList.toggle('hidden');
-    });
-} 
-// kbd_content.querySelector('.CapsLock').addEventListener('click', () => {
-//     toggleCapsShift(); 
-// });
 
-document.addEventListener('keydown', (event) => {
-    while (shiftKeyHeld && capsLockPressed) {
-        toggleCapsShift();
-    }
-});
+
+
+
+// //CAPSSHIFT//CAPSSHIFT//CAPSSHIFT//CAPSSHIFT//CAPSSHIFT//CAPSSHIFT//CAPSSHIFT//CAPSSHIFT//CAPSSHIFT//CAPSSHIFT
+// function toggleCapsShift() {
+//     // kbd_content.querySelector('.CapsLock').classList.toggle('active');
+//     const elements = document.querySelectorAll('.caseDown, .caseUp, .caps, .shiftCaps');    
+//     elements.forEach(caseDiv => {
+//             caseDiv.classList.toggle('hidden');
+//     });
+// } 
+// // kbd_content.querySelector('.CapsLock').addEventListener('click', () => {
+// //     toggleCapsShift(); 
+// // });
+
+// document.addEventListener('keydown', (event) => {
+//     while (shiftKeyHeld && capsLockActive) {
+//         toggleCapsShift();
+//     }
+// });
 
 
 
@@ -370,7 +308,7 @@ kbd_content.firstElementChild.classList.add('row1');
         const footer = document.createElement('footer');
         const footer_container = document.createElement('div');
             const footer_content = document.createElement('div');
-body.appendChild(footer);
+        body.appendChild(footer);
 
 
 
@@ -396,25 +334,7 @@ document.addEventListener('keydown', (event) => {
             // }
             if (event.key === 'Tab' ){
                 event.preventDefault();
-                // textarea.value += ' '.repeat(4);//'\u00A0';
-                // Insert spaces into the textarea
-                const cursorStart = textarea.selectionStart;
-                const cursorEnd = textarea.selectionEnd;
-                const currentValue = textarea.value;
-                const spaces = ' '.repeat(4); // Adjust the number of spaces as needed
-            
-                // Calculate the new value with spaces inserted at the cursor position
-                const newValue =
-                    currentValue.substring(0, cursorStart) +
-                    spaces +
-                    currentValue.substring(cursorEnd);
-            
-                textarea.value = newValue;
-                textarea.selectionStart = cursorStart + spaces.length; // Move the cursor forward
-                textarea.selectionEnd = cursorStart + spaces.length;
-                textarea.focus();
-    
-                textarea.dispatchEvent(new Event('input'));
+                insertSpecialKey(' '.repeat(4));
             }
             // if (event.key === 'Backspace' ){
             //     textarea.value = textarea.value.slice(0, -1);
@@ -424,72 +344,43 @@ document.addEventListener('keydown', (event) => {
             // }
             if (event.key === 'CapsLock' ){
                 if (!event.repeat) {
+                    // kbd_content.querySelector('.CapsLock').classList.toggle('active');
                     toggleCaps();
                 }
             }
             if (event.key === 'Shift' ){
                 if (!event.repeat) {
-                    console.log('real shift');
+                    // console.log('real shift');
                     toggleShift();
                 }
             }
             if (event.key === 'Enter'){
                 event.preventDefault();
-                const cursorStart = textarea.selectionStart;
-                const cursorEnd = textarea.selectionEnd;
-                const currentValue = textarea.value;
-                const spaces = '\n' // Adjust the number of spaces as needed
-                // Calculate the new value with spaces inserted at the cursor position
-                const newValue =
-                    currentValue.substring(0, cursorStart) +
-                    spaces +
-                    currentValue.substring(cursorEnd);
-            
-                textarea.value = newValue;
-                textarea.selectionStart = cursorStart + spaces.length; // Move the cursor forward
-                textarea.selectionEnd = cursorStart + spaces.length;
-                textarea.focus();
-    
-                textarea.dispatchEvent(new Event('input'));
+                insertSpecialKey('\n');
             }
     } else {
         event.preventDefault();
+        insertSpecialKey(event.key);
         document.querySelector('.'+event.code).classList.toggle('active');
-        console.log(event.code);
-        const cursorStart = textarea.selectionStart;
-                    const cursorEnd = textarea.selectionEnd;
-                    const currentValue = textarea.value;
-                
-                    // Calculate the new value with the character inserted at the cursor position
-                    const newValue =
-                        currentValue.substring(0, cursorStart) +
-                        event.key +
-                        currentValue.substring(cursorEnd);
-                
-                    textarea.value = newValue;
-                    textarea.selectionStart = cursorStart + 1; // Move the cursor one position forward
-                    textarea.selectionEnd = cursorStart + 1;
-                    textarea.focus();
-
-                    textarea.dispatchEvent(new Event('input'));
     }
 });
 
 document.addEventListener('keyup', (event) => {
     if (event.key === 'Shift'){
         toggleShift();
+    } else if(event.key === 'CapsLock') {
+
     } else {
         kbd_content.querySelector('.'+event.code).classList.remove('active');
     }
 })
 
-// why pressing real keys on 3rd row give: Uncaught TypeError: kbd_content.querySelector(...) is null, but not when pressing keys on other rows 
 
 
 
 
 
-// Function to move the cursor left by one position
+
 function moveCursorLeft() {
     const cursorPosition = textarea.selectionStart;
     if (cursorPosition > 0) {
@@ -499,7 +390,6 @@ function moveCursorLeft() {
     }
 }
 
-// Function to move the cursor right by one position
 function moveCursorRight() {
     const cursorPosition = textarea.selectionStart;
     const textLength = textarea.value.length;
@@ -539,7 +429,7 @@ function moveCursorDown() {
     const cursorPosition = textarea.selectionStart;
     const textValue = textarea.value;
     const lines = textValue.split('\n');
-    const currentLineIndex = textValue.substr(0, cursorPosition).split('\n').length - 1;
+    const currentLineIndex = textValue.substring(0, cursorPosition).split('\n').length - 1;
 
     if (currentLineIndex < lines.length - 1) {
         const currentLine = lines[currentLineIndex];
@@ -567,4 +457,24 @@ function moveCursorDown() {
       
     //   textarea.dispatchEvent(arrowDownKeyPress);
     // textarea.focus();
+}
+
+function insertSpecialKey(key){
+    // event.preventDefault();
+    const cursorStart = textarea.selectionStart;
+    const cursorEnd = textarea.selectionEnd;
+    const currentValue = textarea.value;
+    const specialKey = key 
+    // Calculate the new value with spaces inserted at the cursor position
+    const newValue =
+        currentValue.substring(0, cursorStart) +
+        specialKey +
+        currentValue.substring(cursorEnd);
+
+    textarea.value = newValue;
+    textarea.selectionStart = cursorStart + specialKey.length; // Move the cursor forward
+    textarea.selectionEnd = cursorStart + specialKey.length;
+    textarea.focus();
+
+    textarea.dispatchEvent(new Event('input'));
 }
