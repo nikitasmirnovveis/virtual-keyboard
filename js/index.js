@@ -318,46 +318,46 @@ kbd_content.firstElementChild.classList.add('row1');
 //REAL KEYBOARD
 //REAL KEYBOARD
 document.addEventListener('keydown', (event) => {
-        // event.preventDefault();
-        if ([
-            'AltLeft', 'AltRight', 'ArrowUp', 'ArrowLeft', 'ArrowDown', 'ArrowRight',
-            'Backspace', 'CapsLock', 'ControlLeft', 'ControlRight', 'Insert', 'Delete', 'Enter',
-            'ShiftLeft', 'ShiftRight', 'Fn', 'Start', 'MetaLeft', 'Tab', 'Space',
-            'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12', 
-            'Control', 'Shift', 'Escape'
-        ].includes(event.code)){
-            kbd_content.querySelector('.'+event.code).classList.toggle('active');
+    // event.preventDefault();
+    if ([
+        'AltLeft', 'AltRight', 'ArrowUp', 'ArrowLeft', 'ArrowDown', 'ArrowRight',
+        'Backspace', 'CapsLock', 'ControlLeft', 'ControlRight', 'Insert', 'Delete', 'Enter',
+        'ShiftLeft', 'ShiftRight', 'Fn', 'Start', 'MetaLeft', 'Tab', 'Space',
+        'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12', 
+        'Control', 'Shift', 'Escape'
+    ].includes(event.code)){
+        kbd_content.querySelector('.'+event.code).classList.toggle('active');
 
-            // if (event.key ==='Space'){
-            //     textarea.value += ' ';//'\u00A0';
-            //     textarea.dispatchEvent(new Event('input'));
-            // }
-            if (event.key === 'Tab' ){
-                event.preventDefault();
-                insertSpecialKey(' '.repeat(4));
+        // if (event.key ==='Space'){
+        //     textarea.value += ' ';//'\u00A0';
+        //     textarea.dispatchEvent(new Event('input'));
+        // }
+        if (event.key === 'Tab' ){
+            event.preventDefault();
+            insertSpecialKey(' '.repeat(4));
+        }
+        // if (event.key === 'Backspace' ){
+        //     textarea.value = textarea.value.slice(0, -1);
+        // }
+        // if (event.key === 'Delete' ){
+        //     textarea.value = textarea.value.slice(0, -1);
+        // }
+        if (event.key === 'CapsLock' ){
+            if (!event.repeat) {
+                // kbd_content.querySelector('.CapsLock').classList.toggle('active');
+                toggleCaps();
             }
-            // if (event.key === 'Backspace' ){
-            //     textarea.value = textarea.value.slice(0, -1);
-            // }
-            // if (event.key === 'Delete' ){
-            //     textarea.value = textarea.value.slice(0, -1);
-            // }
-            if (event.key === 'CapsLock' ){
-                if (!event.repeat) {
-                    // kbd_content.querySelector('.CapsLock').classList.toggle('active');
-                    toggleCaps();
-                }
+        }
+        if (event.key === 'Shift' ){
+            if (!event.repeat) {
+                // console.log('real shift');
+                toggleShift();
             }
-            if (event.key === 'Shift' ){
-                if (!event.repeat) {
-                    // console.log('real shift');
-                    toggleShift();
-                }
-            }
-            if (event.key === 'Enter'){
-                event.preventDefault();
-                insertSpecialKey('\n');
-            }
+        }
+        if (event.key === 'Enter'){
+            event.preventDefault();
+            insertSpecialKey('\n');
+        }
     } else {
         event.preventDefault();
         insertSpecialKey(event.key);
